@@ -1,19 +1,19 @@
 	const creepCount = {
 		harvester: {
 			current: 0,
-			target: 9
+			target: 7
 		},
 		upgrader: {
 			current: 0,
-			target: 10
+			target: 4
 		},
 		worker: {
 			current: 0,
-			target: 4
+			target: 5
 		},
 		builder: {
 			current: 0,
-			target: 4
+			target: 2
 		},
 	}
 
@@ -65,7 +65,7 @@ function printCreepCount(){
 
 function generateBody(role){
 	if(role === 'worker' || role === 'builder') return [WORK, WORK, CARRY, MOVE]
-	else return [WORK, CARRY, MOVE, MOVE]
+	else return [WORK, WORK, CARRY, CARRY, MOVE]
 }
 
 function generateMemory(role){
