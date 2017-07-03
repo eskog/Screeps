@@ -5,15 +5,15 @@
 		},
 		upgrader: {
 			current: 0,
-			target: 20
+			target: 10
 		},
-		repair: {
+		worker: {
 			current: 0,
-			target: 0
+			target: 4
 		},
 		builder: {
 			current: 0,
-			target: 0
+			target: 4
 		},
 	}
 
@@ -40,17 +40,20 @@ function determineRole(){
 	return false
 }
 
-function updateCreepCount(){
+function updateCreepCount(creepCount){
 	creepCount['harvester'].current = 0 
 	creepCount['upgrader'].current = 0
-	creepCount['repair'].current = 0
+	creepCount['worker'].current = 0
 	creepCount['builder'].current = 0
+	//console.log(creepCount['builder'].target)
 
 	for(let name in Game.creeps){
 		const creep = Game.creeps[name]
 		const role = creep.memory.role
-		
+		//console.log(creepCount[role].current)
 		creepCount[role].current += 1
+		//console.log('after')
+		//console.log(creepCount[role].current)
 	}
 }
 
@@ -61,7 +64,8 @@ function printCreepCount(){
 }
 
 function generateBody(role){
-	return [WORK, CARRY, MOVE, MOVE]
+	if(role === 'worker' || role === 'builder') return [WORK, WORK, CARRY, MOVE]
+	else return [WORK, CARRY, MOVE, MOVE]
 }
 
 function generateMemory(role){

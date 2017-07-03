@@ -1,9 +1,13 @@
-function run(creep){
-	const controller = creep.room.controller
-	const result = creep.upgradeController(controller)
+const upgraderRole = require('upgraderrole')
 
-	if(result === ERR_NOT_IN_RANGE) creep.moveTo(controller)
-	//if((result === ERR_NOT_IN_RANGE) && creep.carry.energy === 0) creep.memory.working = false
+function run(creep){
+const constructionSite = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES)
+	if(constructionSite){
+		const result = creep.build(constructionSite)
+		if(result === ERR_NOT_IN_RANGE) creep.moveTo(constructionSite)
+
+	}
+else upgraderRole.run(creep)
 }
 
 

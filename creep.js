@@ -1,10 +1,11 @@
 const harvesterRole = require('harvesterrole')
 const upgraderRole = require('upgraderrole')
+const workerRole = require('workerrole')
+const builderRole = require('builderrole')
 const mineEnergy = require('mineEnergy')
 function run(){
 	creep()
 }
-
 
 function creep(){
 	for(let name in Game.creeps){
@@ -28,7 +29,7 @@ function assignTask(creep){
 	if(!creep.memory.working) mineEnergy.run(creep)
 	else if(role === 'harvester') harvesterRole.run(creep)
 	else if(role === 'upgrader') upgraderRole.run(creep)
-	else if(role === 'repairer') repairerRole.run(creep)
+	else if(role === 'worker') workerRole.run(creep)
 	else if(role === 'builder') builderRole.run(creep)
 }
 
