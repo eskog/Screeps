@@ -1,19 +1,28 @@
 	const creepCount = {
 		harvester: {
 			current: 0,
-			target: 4
+			target: 9
 		},
 		upgrader: {
 			current: 0,
-			target: 2
-		}
+			target: 20
+		},
+		repair: {
+			current: 0,
+			target: 0
+		},
+		builder: {
+			current: 0,
+			target: 0
+		},
 	}
 
 function run(){
-	updateCreepCount()
+	updateCreepCount(creepCount)
+	//printCreepCount()
 	const role = determineRole()
 	if(role){
-		const body = generatBody(role)
+		const body = generateBody(role)
 		const memory = generateMemory(role)
 		spawnCreep(body, memory, role)
 	}
@@ -23,6 +32,7 @@ function determineRole(){
 	for(let role in creepCount){
 		const obj = creepCount[role]
 
+
 		if (obj.current < obj.target){
 			return role
 		}
@@ -31,7 +41,12 @@ function determineRole(){
 }
 
 function updateCreepCount(){
-	for(let namein Game.creeps){
+	creepCount['harvester'].current = 0 
+	creepCount['upgrader'].current = 0
+	creepCount['repair'].current = 0
+	creepCount['builder'].current = 0
+
+	for(let name in Game.creeps){
 		const creep = Game.creeps[name]
 		const role = creep.memory.role
 		
@@ -41,12 +56,12 @@ function updateCreepCount(){
 
 function printCreepCount(){
 	for(let role in creepCount){
-		console.log('${role}: ${creepCount[role].current}/$({creepCount[role].target)')
+		console.log(`${role}: ${creepCount[role].current}/(${creepCount[role].target})`)
 	}
 }
 
 function generateBody(role){
-	return [WORK, CARRY, MOVE]
+	return [WORK, CARRY, MOVE, MOVE]
 }
 
 function generateMemory(role){
@@ -56,17 +71,18 @@ function generateMemory(role){
 	}
 }
 
-function spawnCreep(const body, const memory, const role){
-	for(let spawn in Game.spawns){
+function spawnCreep(body, memory, role){
+	for(let spawnpoint in Game.spawns){
+		spawn = Game.spawns[spawnpoint]
 		const name = spawn.createCreep(body, null, memory)
 		if(typeof name === 'string'){
-			console.log('Created creep ${name} with role ${role}')
+			console.log(`Created creep ${name} with role ${role}`)
 			creepCount[role].current += 1
 			printCreepCount()
 		}
 	}
 }
 
-module.export = {
+module.exports = {
 	run
 };
