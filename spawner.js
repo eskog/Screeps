@@ -1,24 +1,6 @@
-	const creepCount = {
-		harvester: {
-			current: 0,
-			target: 7
-		},
-		upgrader: {
-			current: 0,
-			target: 4
-		},
-		worker: {
-			current: 0,
-			target: 5
-		},
-		builder: {
-			current: 0,
-			target: 2
-		},
-	}
-
 function run(){
 	const role = determineRole()
+    //printCreepCount()
 	if(role){
 		const body = generateBody(role)
 		const memory = generateMemory(role)
@@ -36,9 +18,9 @@ function determineRole() {
 
 function printCreepCount(){
     console.log('Harvesters: ' + _(Game.creeps).filter({memory: {role: 'harvester'}}).size())
-    console.log('Harvesters: ' + _(Game.creeps).filter({memory: {role: 'upgrader'}}).size())
-    console.log('Harvesters: ' + _(Game.creeps).filter({memory: {role: 'worker'}}).size())
-    console.log('Harvesters: ' + _(Game.creeps).filter({memory: {role: 'builder'}}).size())
+    console.log('upgrader: ' + _(Game.creeps).filter({memory: {role: 'upgrader'}}).size())
+    console.log('worker: ' + _(Game.creeps).filter({memory: {role: 'worker'}}).size())
+    console.log('builder: ' + _(Game.creeps).filter({memory: {role: 'builder'}}).size())
     console.log('WallRepairer: ' + _(Game.creeps).filter({memory: {role: 'wallRepairer'}}).size())
 }
 
