@@ -18,8 +18,6 @@
 	}
 
 function run(){
-	updateCreepCount(creepCount)
-	//printCreepCount()
 	const role = determineRole()
 	if(role){
 		const body = generateBody(role)
@@ -28,44 +26,26 @@ function run(){
 	}
 }
 
-function determineRole(){
-	for(let role in creepCount){
-		const obj = creepCount[role]
-
-
-		if (obj.current < obj.target){
-			return role
-		}
-	}
-	return false
-}
-
-function updateCreepCount(creepCount){
-	creepCount['harvester'].current = 0 
-	creepCount['upgrader'].current = 0
-	creepCount['worker'].current = 0
-	creepCount['builder'].current = 0
-	//console.log(creepCount['builder'].target)
-
-	for(let name in Game.creeps){
-		const creep = Game.creeps[name]
-		const role = creep.memory.role
-		//console.log(creepCount[role].current)
-		creepCount[role].current += 1
-		//console.log('after')
-		//console.log(creepCount[role].current)
-	}
+function determineRole() {
+    if (_(Game.creeps).filter({memory: {role: 'harvester'}}).size() < 5) return 'harvester'
+    if (_(Game.creeps).filter({memory: {role: 'upgrader'}}).size() < 7) return 'upgrader'
+    if (_(Game.creeps).filter({memory: {role: 'worker'}}).size() < 5) return 'worker'
+    if (_(Game.creeps).filter({memory: {role: 'builder'}}).size() < 2) return 'builder'
+    if (_(Game.creeps).filter({memory: {role: 'WallRepairer'}}).size() < 1) return 'WallRepairer'
 }
 
 function printCreepCount(){
-	for(let role in creepCount){
-		console.log(`${role}: ${creepCount[role].current}/(${creepCount[role].target})`)
-	}
+    console.log('Harvesters: ' + _(Game.creeps).filter({memory: {role: 'harvester'}}).size())
+    console.log('Harvesters: ' + _(Game.creeps).filter({memory: {role: 'upgrader'}}).size())
+    console.log('Harvesters: ' + _(Game.creeps).filter({memory: {role: 'worker'}}).size())
+    console.log('Harvesters: ' + _(Game.creeps).filter({memory: {role: 'builder'}}).size())
+    console.log('WallRepairer: ' + _(Game.creeps).filter({memory: {role: 'WallRepairer'}}).size())
 }
 
 function generateBody(role){
-	if(role === 'worker' || role === 'builder') return [WORK, WORK, CARRY, MOVE]
-	else return [WORK, WORK, CARRY, CARRY, MOVE]
+    if(role === 'worker' || role === 'builder') return [WORK, WORK, CARRY, MOVE]
+    if(role === 'upgrader') return [WORK, WORK, CARRY, MOVE]
+	else return [WORK, CARRY, CARRY, MOVE]
 }
 
 function generateMemory(role){
@@ -81,7 +61,6 @@ function spawnCreep(body, memory, role){
 		const name = spawn.createCreep(body, null, memory)
 		if(typeof name === 'string'){
 			console.log(`Created creep ${name} with role ${role}`)
-			creepCount[role].current += 1
 			printCreepCount()
 		}
 	}

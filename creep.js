@@ -33,8 +33,6 @@ function assignTask(creep){
 	else if(role === 'builder') builderRole.run(creep)
 }
 
-
-
 module.exports = {
 	run
 };
