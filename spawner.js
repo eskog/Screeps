@@ -31,7 +31,7 @@ function determineRole() {
     if (_(Game.creeps).filter({memory: {role: 'upgrader'}}).size() < 7) return 'upgrader'
     if (_(Game.creeps).filter({memory: {role: 'worker'}}).size() < 5) return 'worker'
     if (_(Game.creeps).filter({memory: {role: 'builder'}}).size() < 2) return 'builder'
-    if (_(Game.creeps).filter({memory: {role: 'WallRepairer'}}).size() < 1) return 'WallRepairer'
+    if (_(Game.creeps).filter({memory: {role: 'wallRepairer'}}).size() < 1) return 'wallRepairer'
 }
 
 function printCreepCount(){
@@ -39,7 +39,7 @@ function printCreepCount(){
     console.log('Harvesters: ' + _(Game.creeps).filter({memory: {role: 'upgrader'}}).size())
     console.log('Harvesters: ' + _(Game.creeps).filter({memory: {role: 'worker'}}).size())
     console.log('Harvesters: ' + _(Game.creeps).filter({memory: {role: 'builder'}}).size())
-    console.log('WallRepairer: ' + _(Game.creeps).filter({memory: {role: 'WallRepairer'}}).size())
+    console.log('WallRepairer: ' + _(Game.creeps).filter({memory: {role: 'wallRepairer'}}).size())
 }
 
 function generateBody(role){
