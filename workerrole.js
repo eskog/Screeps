@@ -6,7 +6,7 @@ function run(creep){
 			filter: s => s.hits && (s.hits < s.hitsMax-50)
     })
 	const wall = creep.pos.findClosestByPath(FIND_STRUCTURES, {
-            filter: s => s.hits && (s.hits < s.hitsMax-50) && s.structureType == STRUCTURE_WALL
+            filter: s => s.hits && (s.hits < 1000000) && s.structureType == STRUCTURE_WALL
     })
     if (structure){
         if(creep.repair(structure) === ERR_NOT_IN_RANGE) creep.moveTo(structure)

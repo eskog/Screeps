@@ -10,10 +10,11 @@ function run(){
 
 function determineRole() {
     if (_(Game.creeps).filter({memory: {role: 'harvester'}}).size() < 6) return 'harvester'
-    if (_(Game.creeps).filter({memory: {role: 'upgrader'}}).size() < 7) return 'upgrader'
-    if (_(Game.creeps).filter({memory: {role: 'worker'}}).size() < 5) return 'worker'
-    if (_(Game.creeps).filter({memory: {role: 'builder'}}).size() < 2) return 'builder'
+    if (_(Game.creeps).filter({memory: {role: 'upgrader'}}).size() < 3) return 'upgrader'
+    if (_(Game.creeps).filter({memory: {role: 'worker'}}).size() < 2) return 'worker'
+    if (_(Game.creeps).filter({memory: {role: 'builder'}}).size() < 1) return 'builder'
     if (_(Game.creeps).filter({memory: {role: 'wallRepairer'}}).size() < 1) return 'wallRepairer'
+    if (_(Game.creeps).filter({memory: {role: 'defenceRole'}}).size() < 1) return 'defenceRole'
 }
 
 function printCreepCount(){
@@ -22,10 +23,11 @@ function printCreepCount(){
     console.log('worker: ' + _(Game.creeps).filter({memory: {role: 'worker'}}).size())
     console.log('builder: ' + _(Game.creeps).filter({memory: {role: 'builder'}}).size())
     console.log('WallRepairer: ' + _(Game.creeps).filter({memory: {role: 'wallRepairer'}}).size())
+    console.log('DefenceRole: ' + _(Game.creeps).filter({memory: {role: 'defenceRole'}}).size())
 }
 //TODO: Skapa en boolean att använda som tar hänsyn till hela kolonins storlek om det ska byggas creeps med få eller många parts
 function generateBody(role){
-    if(role === 'harvester' && _(Game.creeps).filter({memory: {role: 'harvester'}}).size() > 4) return   [WORK, CARRY, CARRY, CARRY, MOVE, MOVE]
+    if(role === 'harvester'  && _(Game.creeps).filter({memory: {role: 'harvester'}}).size() > 4) return   [WORK, CARRY, CARRY, CARRY, MOVE, MOVE]
     if(role === 'upgrader') return [WORK, WORK, CARRY, MOVE]
     if(role === 'worker' || role === 'builder' || role === 'wallRepairer') return [WORK, WORK, CARRY, MOVE]
     else return [WORK, CARRY, MOVE]
