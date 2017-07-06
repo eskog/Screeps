@@ -8,10 +8,12 @@ function defendRoom(){
         var towers = Game.rooms[room].find(
             FIND_MY_STRUCTURES, {filter: {structureType: STRUCTURE_TOWER}}
         )
-        for(let tower in towers){
-            tower => tower.attack(hostiles[0])
 
-        }
+        towers.forEach(tower => tower.attack(hostiles[0]));
+        //for(let tower in towers){
+        //    tower => tower.attack(hostiles[0])
+
+       // }
     }
 }
 

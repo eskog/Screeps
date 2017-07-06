@@ -2,9 +2,6 @@ const upgraderRole = require('upgraderrole')
 
 function run(creep){
 	supplyTower(creep)
-	//TODO: Consolidate the IF statements below
-	//if(creep.transfer(dropoff, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) creep.moveTo(dropoff)
-	//if((creep.transfer(dropoff, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) && creep.carry.energy === 0) creep.memory.working = false
 }
 
 function supplyTower(creep){
