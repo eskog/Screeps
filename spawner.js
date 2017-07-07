@@ -28,8 +28,8 @@ function printCreepCount(){
 //TODO: Skapa en boolean att använda som tar hänsyn till hela kolonins storlek om det ska byggas creeps med få eller många parts
 function generateBody(role){
     if(role === 'harvester'  && _(Game.creeps).filter({memory: {role: 'harvester'}}).size() > 4) return   [WORK, CARRY, CARRY, CARRY, MOVE, MOVE]
-    if(role === 'upgrader') return [WORK, WORK, CARRY, MOVE]
-    if(role === 'worker' || role === 'builder' || role === 'wallRepairer') return [WORK, WORK, CARRY, MOVE]
+    if(role === 'upgrader') return [WORK, WORK, CARRY, MOVE, MOVE]
+    if(role === 'worker' || role === 'builder' || role === 'wallRepairer') return [WORK, WORK, CARRY, MOVE, MOVE]
     else return [WORK, CARRY, MOVE]
 }
 
